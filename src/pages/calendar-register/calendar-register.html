@@ -1,0 +1,317 @@
+<!--
+  Generated template for the CalendarRegisterPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>CalendarRegister</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content class="grid-basic-page" >
+  <!--
+    <ion-list>
+        <ion-list-header><h1>・Events</h1></ion-list-header>
+        
+       <ion-item  (click)="goToChartPage()"> 
+          <ion-icon name="book" danger item-left>
+            BitCoin Articles
+          </ion-icon>
+        </ion-item>
+    </ion-list>
+
+    <ion-list>
+        
+       <ion-item  (click)="goToChartPage()"> 
+          <ion-icon name="book" danger item-left >
+            Ethereum Articles
+          </ion-icon>
+        </ion-item>
+        
+    </ion-list>
+    <br>-->
+
+    <!---->
+
+    <!--Edit -->
+    <ion-list>
+        <ion-list-header ><h1>・Edit</h1></ion-list-header>
+        <!--CoinName-->
+      <ion-item>
+            <ion-label>CoinName:</ion-label>
+            <ion-select [(ngModel)]="CoinName"  interface="popover">
+                <ion-option value="" selected="true">CoinName</ion-option>
+              <ion-option value="BitCoin" >BitCoin</ion-option>
+              <ion-option value="Ethereum">Ethereum</ion-option>
+              <ion-option value="Ripple">Ripple</ion-option>
+              <ion-option value="NEM">NEM</ion-option>
+              <ion-option value="Dash">Dash</ion-option>
+              <ion-option value="Lisk">Lisk</ion-option>
+            </ion-select>
+      </ion-item>
+
+      <ion-item>
+            <ion-label>EventDate</ion-label>
+            <ion-datetime displayFormat="YYYY-MM-DD " min="2018-01" max="2028-12" [(ngModel)]="EventDate"></ion-datetime>
+      </ion-item>
+
+      <!--Importance-->
+      <ion-item id="Importance-register">
+          <ion-label fixed >Importance:</ion-label>
+          <ion-input type="number" max="3" min="1" placeholder="1" [(ngModel)]="Importance"></ion-input>
+      </ion-item>
+      <!--URL-->
+        <ion-item id="ArticleURL-register">
+            <ion-label fixed >ArticleURL:</ion-label>
+            <ion-input type="text" placeholder="ArticleURL here" [(ngModel)]="ArticleURL"></ion-input>
+        </ion-item>
+      <!--EventName-->
+        <ion-item id="EventName-register">
+            <ion-label fixed >EventName:</ion-label>
+            <ion-input type="text" placeholder="Enter EventName here" [(ngModel)]="EventName"></ion-input>
+        </ion-item>
+      <!--DB-URL-->
+        <ion-item id="DatabaseURL-register">
+            <ion-label fixed >DB-URL:</ion-label>
+            <ion-input type="text" placeholder="Enter DatabaseURL here" [(ngModel)]="DatabaseURL"></ion-input>
+        </ion-item>
+        
+    </ion-list> 
+   
+
+
+    <!--Button Functions-->
+      <!--Create-->  
+      <ion-row>
+       <ion-col>
+        <button ion-button block (click)="createEvent(CoinName,EventDate,Importance,ArticleURL,EventName,DatabaseURL)"> <!--Check the order-->  
+          Create Event
+        </button>
+       </ion-col>
+      <!--Update-->
+       <ion-col> 
+        <button ion-button block (click)="updateEvent(CoinName,EventDate,Importance,ArticleURL,EventName,DatabaseURL)"> <!--Check the order-->  
+          Update Event
+        </button>
+       </ion-col>
+      <!--Delete-->
+       <ion-col>
+        <button ion-button block (click)="goToChartPage()">
+          Delete Event
+        </button>
+       </ion-col>
+      </ion-row> 
+      <br><br><hr><br>
+
+
+      <!--Table Read from firebase-->
+        <ion-grid>
+            <h1><b>・TableSelect</b></h1>
+
+            <!--DB-URL-Setter-->
+        <ion-item id="DatabaseURL-setter">
+            <ion-label fixed >DB-URL:</ion-label>
+            <ion-input type="text" placeholder="Enter DatabaseURL to view" [(ngModel)]="DatabaseViewRequest"></ion-input>
+        </ion-item>
+
+        <!--DB-Button Functions--> 
+      <!--Search-->  
+      <ion-row>
+          <ion-col>
+           <button ion-button block (click)="searchTable(DatabaseViewRequest)"> <!--Check the order-->  
+            Search table
+           </button>
+          </ion-col>
+      </ion-row>
+
+         <!--DB-table-->
+         
+         <h1><b>・Tables</b></h1>
+           <ion-row class="row-header">
+            <ion-col>
+              <div class="col"><h2>Date</h2></div>
+            </ion-col>
+            <ion-col>  
+              <div class="col"><h2>CoinName</h2></div>
+            </ion-col>
+            <ion-col>
+              <div class="col"><h2>Importance</h2></div>
+            </ion-col>
+            <ion-col>
+                <div class="col"><h2>EventName</h2></div>
+              </ion-col>
+            <ion-col>
+                <div class="col"><h2>ArticleURL</h2></div>
+            </ion-col> 
+            
+          </ion-row>
+ 
+          <!--TableRefference--> 
+          <ion-row>
+              <ion-col>
+                <div class="col" id="EventDate">{{reffer.EventDate}}</div>
+              </ion-col>
+              <ion-col>  
+                <div class="col" id="CoinName">{{reffer.CoinName}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="col" id="Importance">{{reffer.Importance}}</div>
+              </ion-col>
+              <ion-col>
+                  <div class="col" id="EventName">{{reffer.EventName}}</div>
+              </ion-col>
+              <ion-col>
+                  <div class="col" id="ArticleURL">{{reffer.ArticleURL}}</div>
+              </ion-col>
+              
+          </ion-row> 
+
+
+
+
+          <br><br><br><br>
+          <!--DB-tableTest-->
+          <br><br><br><br><h1><b>・RoopTest</b></h1>
+          <ion-row class="row-header">
+              <ion-col>
+                <div class="col"><h2>Date</h2></div>
+              </ion-col>
+              <ion-col>  
+                <div class="col"><h2>CoinName</h2></div>
+              </ion-col>
+              <ion-col>
+                <div class="col"><h2>Importance</h2></div>
+              </ion-col>
+              <ion-col>
+                  <div class="col"><h2>EventName</h2></div>
+                </ion-col>
+              <ion-col>
+                  <div class="col"><h2>ArticleURL</h2></div>
+              </ion-col> 
+              
+            </ion-row>
+          <!--TableRefference2--> 
+          <ion-row >
+              <ion-col>
+                <div class="col" id="RefEventDate">{{reffer.EventDate}}</div>
+              </ion-col>
+              <ion-col>  
+                <div class="col" id="RefCoinName">{{reffer.CoinName}}</div>
+              </ion-col>
+              <ion-col>
+                <div class="col" id="RefImportance">{{reffer.Importance}}</div>
+              </ion-col>
+              <ion-col>
+                  <div class="col" id="RefEventName">{{reffer.EventName}}</div>
+              </ion-col>
+              <ion-col>
+                  <div class="col" id="RefArticleURL">{{reffer.ArticleURL}}</div>
+              </ion-col>
+              
+          </ion-row>
+          
+        </ion-grid>
+
+
+
+
+</ion-content>
+ 
+
+<!-- <div class="row header">
+              <div class="col">CoinName</div>
+              <div class="col">Event</div>
+              <div class="col"></div>
+            </div>
+            <div class="row">
+              <div class="col">{{reffer.CoinName}}</div>
+              <div class="col">{{reffer.Event}}</div>
+              <div class="col"></div>
+          </div>-->
+
+<!--<ion-item *ngFor="let ethereum of ICOlist | async">-->
+     
+        <!--EventDate
+        <ion-item>
+            <ion-label>EventDate:</ion-label>
+            <ion-select [(ngModel)]="EventYear"  interface="popover">
+                <ion-option value="" selected="true">Year</ion-option>
+              <ion-option value="2018" >2018</ion-option>
+              <ion-option value="2019">2019</ion-option>
+              <ion-option value="2020">2020</ion-option>
+              <ion-option value="2021">2021</ion-option>
+              <ion-option value="2022">2022</ion-option>
+              <ion-option value="2023">2023</ion-option>
+            </ion-select>
+            <ion-select [(ngModel)]="EventMonth"  interface="popover">
+              <ion-option value="" selected="true">Month</ion-option>
+              <ion-option value="01">01</ion-option>
+              <ion-option value="02">02</ion-option>
+              <ion-option value="03" >03</ion-option>
+              <ion-option value="04">04</ion-option>
+              <ion-option value="05">05</ion-option>
+              <ion-option value="06">06</ion-option>
+              <ion-option value="07">07</ion-option>
+              <ion-option value="08">08</ion-option>
+              <ion-option value="09">09</ion-option>
+              <ion-option value="10">10</ion-option>
+              <ion-option value="11">11</ion-option>
+              <ion-option value="12">12</ion-option>
+            </ion-select>
+            <ion-select [(ngModel)]="EventDay" interface="popover" >
+                <ion-option value="" selected="true">Day</ion-option>
+                <ion-option value="01" >01</ion-option>
+                <ion-option value="02">02</ion-option>
+                <ion-option value="03">03</ion-option>
+                <ion-option value="04">04</ion-option>
+                <ion-option value="05">05</ion-option>
+                <ion-option value="06">06</ion-option>
+                <ion-option value="07">07</ion-option>
+                <ion-option value="08">08</ion-option>
+                <ion-option value="09">09</ion-option>
+                <ion-option value="10">10</ion-option>
+                <ion-option value="11">11</ion-option>
+                <ion-option value="12">12</ion-option>
+                <ion-option value="13">13</ion-option>
+                <ion-option value="14">14</ion-option>
+                <ion-option value="15">15</ion-option>
+                <ion-option value="16">16</ion-option>
+                <ion-option value="17">17</ion-option>
+                <ion-option value="18">18</ion-option>
+                <ion-option value="19">19</ion-option>
+                <ion-option value="20">20</ion-option>
+                <ion-option value="21">21</ion-option>
+                <ion-option value="22">22</ion-option>
+                <ion-option value="23">23</ion-option>
+                <ion-option value="24">24</ion-option>
+                <ion-option value="25">25</ion-option>
+                <ion-option value="26">26</ion-option>
+                <ion-option value="27">27</ion-option>
+                <ion-option value="28">28</ion-option>
+                <ion-option value="29">29</ion-option>
+                <ion-option value="30">30</ion-option>
+                <ion-option value="31">31</ion-option>
+                </ion-select>
+            
+      </ion-item>-->
+     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
