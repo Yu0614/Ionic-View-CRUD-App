@@ -110,7 +110,7 @@
 
 
       <!--Table Read from firebase-->
-        <ion-grid>
+      <ion-grid>
             <h1><b>・TableSelect</b></h1>
 
             <!--DB-URL-Setter-->
@@ -174,9 +174,9 @@
 
 
 
-          <br><br><br><br>
+  
           <!--DB-tableTest-->
-          <br><br><br><br><h1><b>・RoopTest</b></h1>
+          <h1><b>・RoopTest</b></h1>
           <ion-row class="row-header">
               <ion-col>
                 <div class="col"><h2>Date</h2></div>
@@ -193,27 +193,28 @@
               <ion-col>
                   <div class="col"><h2>ArticleURL</h2></div>
               </ion-col> 
-              
             </ion-row>
-          <!--TableRefference2--> 
-          <ion-row >
+
+          <!--TableRefference2 using *ngFor to show tables from firebase.database
+         <ion-item *ngFor="let ref of roopReffer">
+          <ion-row>
               <ion-col>
-                <div class="col" id="RefEventDate">{{reffer.EventDate}}</div>
+                <div class="col" id="RefEventDate">{{ref.EventDate}}</div>
               </ion-col>
               <ion-col>  
-                <div class="col" id="RefCoinName">{{reffer.CoinName}}</div>
+                <div class="col" id="RefCoinName">{{ref.CoinName}}</div>
               </ion-col>
               <ion-col>
-                <div class="col" id="RefImportance">{{reffer.Importance}}</div>
+                <div class="col" id="RefImportance">{{ref.Importance}}</div>
               </ion-col>
               <ion-col>
-                  <div class="col" id="RefEventName">{{reffer.EventName}}</div>
+                  <div class="col" id="RefEventName">{{ref.EventName}}</div>
               </ion-col>
               <ion-col>
-                  <div class="col" id="RefArticleURL">{{reffer.ArticleURL}}</div>
-              </ion-col>
-              
+                  <div class="col" id="RefArticleURL">{{ref.ArticleURL}}</div>
+              </ion-col>  
           </ion-row>
+        </ion-item>--> 
           
         </ion-grid>
 
