@@ -7,6 +7,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { AngularFireDatabase } from 'angularfire2/database'; // 追加
 import { Observable } from 'rxjs/Observable'; // 追加
+//import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
 
 @Component({
   templateUrl: 'app.html'

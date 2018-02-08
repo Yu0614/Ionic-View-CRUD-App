@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import firebase from 'firebase';
 import { NavController, NavParams } from 'ionic-angular';
-//import { Observable } from 'rxjs/Observable';
-import { AngularFireDatabase} from "angularfire2/database";
-//import { AngularFireObject } from 'angularfire2/database/interfaces';
-import { ChartPage } from '../chart/chart';
 
+import { AngularFireDatabase,/* AngularFireList*/} from "angularfire2/database";
+import { ChartPage } from '../chart/chart';
+//import { DataSnapshot } from '@firebase/database/dist/esm/src/api/DataSnapshot';
+
+//import { Observable } from 'rxjs/Observable';
 /**
  * Generated class for the CalendarRegisterPage page.
  *
@@ -13,36 +14,55 @@ import { ChartPage } from '../chart/chart';
  * Ionic pages and navigation.
  */
  
+
+
 @Component({
   selector: 'page-calendar-register',
   templateUrl:'calendar-register.html',
-  /*template: `
-  <ion-item *ngFor="let ref of roopReffer">
-          <ion-row>
-              <ion-col>
-                <div class="col" id="RefEventDate">{{ref.EventDate}}</div>
-              </ion-col>
-              <ion-col>  
-                <div class="col" id="RefCoinName">{{ref.CoinName}}</div>
-              </ion-col>
-              <ion-col>
-                <div class="col" id="RefImportance">{{ref.Importance}}</div>
-              </ion-col>
-              <ion-col>
-                  <div class="col" id="RefEventName">{{ref.EventName}}</div>
-              </ion-col>
-              <ion-col>
-                  <div class="col" id="RefArticleURL">{{ref.ArticleURL}}</div>
-              </ion-col>  
-          </ion-row>
-        </ion-item>
-        `,*/
+ 
 })
+  
 export class CalendarRegisterPage {
 
-    reffer; 
-    DatabaseViewURL;
-    roopReffer; // htmlに受け渡しする箱
+  
+
+    reffer={}; //object
+    DatabaseViewURL = 'Calendar/2018-01-30/Bit';
+    loopReffer;  // htmlに受け渡しする箱
+    //Loops=[];
+    //arrays =[];
+    /*articles: // 型の返り値定義 代入ばーじょん
+      {
+        url:string,
+        title:string,
+        author:string,
+        released:string
+      }[]=[];*/
+      CalendarTest = [
+        {
+          ArticleURL: "https://www.yahoo.co.jp/",
+          CoinName: "BitCoin",
+          EventName: "BitCoin buy",
+          EventDate: "2018-01-31",
+          Importance: "3",
+          
+        },
+        {
+          ArticleURL: 'https://www.yahoo.co.jp/',
+          EventName: 'Ethereum softfork',
+          Importance: 2,
+          EventDate: '2018-01-31',
+          CoinName: 'Ethereum'
+        } 
+      ]
+
+      Calendar:{
+          ArticleURL: string,
+          CoinName: string,
+          EventName: string,
+          EventDate: string,
+          Importance: string,
+      }[]=[]; // 型指定・設定値初期化
 
   constructor(
     public navCtrl: NavController, 
@@ -50,21 +70,11 @@ export class CalendarRegisterPage {
     public afDB: AngularFireDatabase,
     
   ) {
-      this.reffer = {}; 
-      this.DatabaseViewURL='Calendar/2018-01-30/Bit'; // Default table DB URL set
-      /*this.roopReffer= [//　箱のひな形？　
-        {
-          ArticleURL:'' ,
-          CoinName:'' ,
-          EventDate: '',
-          EventName: '' ,
-          Importance: ''
-        }
-      ] */
-
-      
-    }
-
+    console.log(this.CalendarTest[0]);
+    console.log('this.CalendarTest[0]');
+    console.log(this.CalendarTest[1]);
+    console.log('this.CalendarTest[1]');
+  } 
   
   /*************************************************
   * ★create Event (Notice: the Order is important)
@@ -125,8 +135,6 @@ export class CalendarRegisterPage {
     deleteRef.remove()
   }
 
-
-
   /*************************************************
   * ★ referrence Function
   *************************************************/
@@ -135,21 +143,63 @@ export class CalendarRegisterPage {
   ionViewDidLoad() :void{
     const readRef: firebase.database.Reference = firebase.database().ref(this.DatabaseViewURL);
     readRef.on('value', readSnapshot => {
-       this.reffer = readSnapshot.val();
-    }); 
+      this.reffer = readSnapshot.val();
+
+      /*this.reffer = readSnapshot.forEach(function(childSnapshot){
+        const a= readSnapshot.exportVal;
+      });
+      
+      console.log(this.reffer);
+      console.log(a);*/
+    
+    /* readRef.on('value', readSnapshot => {
+       this.reffer = readSnapshot.val();*/ // デフォルト
+
+       
+
+      }); 
+
+      
+  
+       
+  
+      
+       /*readRef.subscribe(data =>{
+         this.Calendar = data['Calendar'];
+       });*/
+       
+       //Object { ArticleURL: "Art", CoinName: "BitCoin", EventDate: "2018-01-31", EventName: "Event", Importance: "1" }
+       
+       /*const arrays= Object.keys(this.reffer).map(function(key){return arrays[key]});
+       this.arrays = arrays;
+       console.log(this.arrays);*/
+       
+    
+    
   }
+
+
+  
 
 
   // search and show Table from database
   searchTable(DatabaseViewRequest: string) :void{
-    this.DatabaseViewURL = DatabaseViewRequest;
-    const readRef: firebase.database.Reference = firebase.database().ref(this.DatabaseViewURL);
-    
-    readRef.on('value', readSnapshot => {
-       this.roopReffer = readSnapshot.val();
-    }); 
+
+ /* this.DatabaseViewURL = DatabaseViewRequest;
+    const readTableRef: firebase.database.Reference = firebase.database().ref(this.DatabaseViewURL);
+    readTableRef.on('value', readSnapshot => {
+       this.loopReffer = readSnapshot.val();
+       console.log(this.loopReffer);// object
+       console.log("loopReffer")
+
+      
+        
+
+    });*/
 
   } 
+
+
   
   /*************************************************
   * ★ goTo Functions 

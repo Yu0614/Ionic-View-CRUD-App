@@ -1,3 +1,32 @@
 page-chart {
+    ion-content{
+        
+        a{
+        
+        color: black; 
+        text-decoration: none;
+         
+        }
 
+         .col{
+            border-bottom:5px; 
+        }
+
+        .left-bar{
+          border-left: solid 1px gray;
+          padding-left: 50px;
+        } 
+        .img{
+    
+          width:"10%"; 
+          height:"5px"; 
+        
+          
+        #aqua{
+          color: aqua;
+        }
+          
+
+        }
+  }
 }

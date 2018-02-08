@@ -129,6 +129,15 @@
           </ion-col>
       </ion-row>
 
+      <!--ngForTest Array-->  
+      <ion-row>
+        <ion-col>
+         <button ion-button block (click)="onTestArray()"> <!--Check the order-->  
+          Test Array
+         </button>
+        </ion-col>
+      </ion-row>
+
          <!--DB-table-->
          
          <h1><b>・Tables</b></h1>
@@ -145,9 +154,6 @@
             <ion-col>
                 <div class="col"><h2>EventName</h2></div>
               </ion-col>
-            <ion-col>
-                <div class="col"><h2>ArticleURL</h2></div>
-            </ion-col> 
             
           </ion-row>
  
@@ -163,18 +169,14 @@
                 <div class="col" id="Importance">{{reffer.Importance}}</div>
               </ion-col>
               <ion-col>
-                  <div class="col" id="EventName">{{reffer.EventName}}</div>
-              </ion-col>
-              <ion-col>
-                  <div class="col" id="ArticleURL">{{reffer.ArticleURL}}</div>
+                  <div class="col" id="EventName"><a href="{{reffer.ArticleURL}}">{{reffer.EventName}}</a></div>
               </ion-col>
               
+              <hr>
+              
           </ion-row> 
+          <hr>
 
-
-
-
-  
           <!--DB-tableTest-->
           <h1><b>・RoopTest</b></h1>
           <ion-row class="row-header">
@@ -189,19 +191,25 @@
               </ion-col>
               <ion-col>
                   <div class="col"><h2>EventName</h2></div>
-                </ion-col>
-              <ion-col>
-                  <div class="col"><h2>ArticleURL</h2></div>
-              </ion-col> 
+              </ion-col>
             </ion-row>
 
-          <!--TableRefference2 using *ngFor to show tables from firebase.database
-         <ion-item *ngFor="let ref of roopReffer">
+          <!--TableRefference2 using *ngFor to show tables from firebase.database--> 
+         <ion-item *ngFor="let t of CalendarTest">
           <ion-row>
+            <ion-col>
+              <div class="col" >{{t.EventDate}}</div>
+            </ion-col>
               <ion-col>
-                <div class="col" id="RefEventDate">{{ref.EventDate}}</div>
+                <div class="col" >{{t.CoinName}}</div>
+              </ion-col> 
+              <ion-col>
+                <div class="col" >{{t.Importance}}</div>
               </ion-col>
-              <ion-col>  
+              <ion-col>
+                <div class="col" ><a href="{{t.ArticleURL}}">{{t.EventName}}</a></div>
+              </ion-col>
+             <!-- <ion-col>  
                 <div class="col" id="RefCoinName">{{ref.CoinName}}</div>
               </ion-col>
               <ion-col>
@@ -212,9 +220,9 @@
               </ion-col>
               <ion-col>
                   <div class="col" id="RefArticleURL">{{ref.ArticleURL}}</div>
-              </ion-col>  
+              </ion-col>-->
           </ion-row>
-        </ion-item>--> 
+        </ion-item>
           
         </ion-grid>
 

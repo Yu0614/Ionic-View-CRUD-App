@@ -12,7 +12,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 // Pages
 import { ChartPage } from '../pages/chart/chart';
-import { NewsPage } from '../pages/news/news';
+import { NewsPage, SafePipe } from '../pages/news/news';
 import { CalendarPage } from '../pages/calendar/calendar';
 import { PortfollioPage } from '../pages/portfollio/portfollio';
 import { SignupPage } from '../pages/signup/signup';
@@ -27,10 +27,21 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { AngularFireModule } from "angularfire2";
 import { AngularFireDatabaseModule} from "angularfire2/database";
 import { AngularFireAuthModule} from 'angularfire2/auth';
-//import * as firebase from 'firebase/app';
-
 // firebase configs
 import { firebaseConfig } from "../environment";
+
+//youtube
+import { YoutubeVideoPlayer } from '@ionic-native/youtube-video-player';
+import { YoutubeProvider } from '../providers/youtube/youtube';
+import { HttpModule } from '@angular/http';
+
+
+//inAppBrowser
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+
+//
+//import { CryptowatchEmbed }  from 'cryptowatch-embed';
+
 
 @NgModule({
   declarations: [
@@ -42,14 +53,18 @@ import { firebaseConfig } from "../environment";
     PortfollioPage,
     SignupPage,
     SignupRooterPage,
-    CalendarRegisterPage
+    CalendarRegisterPage,
+    SafePipe,
+    
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    HttpModule,
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -66,7 +81,11 @@ import { firebaseConfig } from "../environment";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    YoutubeProvider,
+    YoutubeVideoPlayer,
+    InAppBrowser,
+    
   ]
 })
 export class AppModule {}
