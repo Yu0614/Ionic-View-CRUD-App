@@ -35,36 +35,11 @@ export class NewsPage {
   CryptoWatch: any;
   CryptoCurrencyChart: any;
   url:any;
-
+  News=[];
+  DatabaseViewURL = 'Calendar/2018-01-30';
   
 
-  NewsTest = [
-    {
-      ArticleURL: "http://localhost:8100/",
-      CoinName: "BitCoin",
-      EventName: "yahoo",
-      EventDate: "2018-01-31",
-      EventImage: "assets/imgs/mig.jpg",
-      YoutubeID:""
-    },
-    {
-      ArticleURL: 'https://www.google.com/',
-      EventName: 'google',
-      EventDate: '2018-01-31',
-      CoinName: 'Ethereum',
-      EventImage: "assets/imgs/logo.png",
-      YoutubeID:""
-    },
-    {
-      ArticleURL: 'https://www.youtube.com',
-      EventName: 'youtube',
-      EventDate: '2018-01-31',
-      CoinName: 'Iota',
-      EventImage: "assets/imgs/youtube.png",
-      YoutubeID:""
-    }  
-
-  ]
+  
 
   constructor(
     public navCtrl: NavController, 
@@ -85,8 +60,15 @@ export class NewsPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewsPage');
+    const readRef: firebase.database.Reference = firebase.database().ref(this.DatabaseViewURL);
+     readRef.on('value',(snapshot) => {
+        snapshot.forEach(snap =>{ 
+          this.News.push(snap.val());  
+          return false; // boolean needed!!
+        }); 
+     });  // convert (object)firebase data to array for loop 
   }
-
+  
  /* playVideo(videoId) {
     return this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/gMWZm4c0W6Q");
   }*/
@@ -114,5 +96,31 @@ export class NewsPage {
 
 
 
+/*NewsTest = [
+  {
+    ArticleURL: "http://localhost:8100/",
+    CoinName: "BitCoin",
+    EventName: "yahoo",
+    EventDate: "2018-01-31",
+    EventImage: "assets/imgs/mig.jpg",
+    
+  },
+  {
+    ArticleURL: 'https://www.google.com/',
+    EventName: 'google',
+    EventDate: '2018-01-31',
+    CoinName: 'Ethereum',
+    EventImage: "assets/imgs/logo.png",
+    
+  },
+  {
+    ArticleURL: 'https://www.youtube.com',
+    EventName: 'youtube',
+    EventDate: '2018-01-31',
+    CoinName: 'Iota',
+    EventImage: "assets/imgs/youtube.png",
+    
+  }  
 
+]*/
 

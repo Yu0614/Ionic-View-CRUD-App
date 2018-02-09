@@ -21,15 +21,16 @@
 
 <ion-content padding>
 
-  <h1><b>・NewsTest</b></h1><br><hr>
+  <h1><b>・CurrentNews</b></h1><br><hr>
   
 
-  <a *ngFor="let nu of NewsTest" href='{{nu.ArticleURL}}' rel="nofollow" class="news">
+
+  <a *ngFor="let nu of News" href='{{nu.ArticleURL}}' rel="nofollow" class="news">
     <ion-grid>
     <ion-row text-align>
-      <ion-col width-10>  
+     <!-- <ion-col width-10>  
         <div class="col"><img src="{{nu.EventImage}}" class="img"></div>
-      </ion-col>
+      </ion-col>-->
 
       <ion-col width-33>  
           <div class="left-bar col">
@@ -45,21 +46,3 @@
   </a>
 
   <!--youtube function--><!--webview function<h1><b>・youtubeTest</b></h1><br><hr>-->
-  
-  
-  <h1><b>・showPageTest</b></h1><br><hr>
-  <ion-buttons >
-    <button ion-button block (click)="showPage()">
-        <ion-icon name="tel" item-left >showPage</ion-icon>
-    </button>
-</ion-buttons>
-
-<!--getAPI function-->
-  <h1><b>・getAPITest</b></h1><br><hr>
-  <ion-buttons >
-    <button ion-button block (click)="getAPI()">
-        <ion-icon name="tel" item-left >getAPI</ion-icon>
-    </button> 
-  </ion-buttons> 
-
-</ion-content>

@@ -1,3 +1,5 @@
+
+import firebase from 'firebase';
 import { Component,Pipe, PipeTransform } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 //pages
@@ -5,17 +7,12 @@ import { SignupPage } from '../signup/signup';
 import { SignupRooterPage } from '../signup-rooter/signup-rooter';
 import { CalendarRegisterPage } from '../calendar-register/calendar-register';
 
-//firebase
-//import { AngularFireDatabase,/*AngularFireList*/} from "angularfire2/database";
-
 //DomSanitizer
 import { DomSanitizer} from '@angular/platform-browser';
 
 //CryptoWatch
 //import { CryptowatchEmbed } from 'cryptowatch-embed';
-
    
-
 //WebView
 @Pipe({ name: 'safe' })
 export class SafePipe implements PipeTransform {
@@ -24,15 +21,6 @@ export class SafePipe implements PipeTransform {
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   }
 }
-/**
- * Generated class for the ChartPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
- 
-
 
 @IonicPage()
 @Component({
@@ -40,56 +28,18 @@ export class SafePipe implements PipeTransform {
   templateUrl: 'chart.html',
 })
 export class ChartPage {
-
-  
+ 
+    DatabaseViewURL = 'CoinList';
     url: any; // iframe's view url
     CryptoWatch: any;
     CryptoCurrencyChart: any;
     TradeViewURL:any;
-    CoinList = [
-      {
-        CoinName: "BitCoin",
-        Symble: "BTC",
-        CompareRate: "22%",
-        CompareResult: "➚",
-        CurrentValue: "￥860,577",
-        ArticleURL: 'https://www.youtube.com',
-      },
-      {
-        CoinName: "Ethereum",
-        Symble: "ETH",
-        CompareRate: "1%",
-        CompareResult: "➘",
-        CurrentValue: "￥86,466",
-        ArticleURL: 'https://www.youtube.com',
-      },{
-        CoinName: "Ethereum",
-        Symble: "ETH",
-        CompareRate: "1%",
-        CompareResult: "➘",
-        CurrentValue: "￥86,466",
-        ArticleURL: 'https://www.youtube.com',
-      },{ 
-        CoinName: "Ethereum",
-        Symble: "ETH",
-        CompareRate: "1%",
-        CompareResult: "➘",
-        CurrentValue: "￥86,466",
-        ArticleURL: 'https://www.youtube.com',
-      },{
-        CoinName: "Ethereum",
-        Symble: "ETH",
-        CompareRate: "1%",
-        CompareResult: "➘",
-        CurrentValue: "￥86,466",
-        ArticleURL: 'https://www.youtube.com',
-      },
-    ]
+    ChartLoop=[];
+    
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
-    //public afDB: AngularFireDatabase,
     //public CWE: CryptowatchEmbed 
   ) {
     this.url="https://cryptowat.ch/";
@@ -103,8 +53,7 @@ export class ChartPage {
       height: 200,
       presetColorScheme: 'bushido'
     }); 
-    this.chart.mount('#chart-container');*/
-    
+    this.chart.mount('#chart-container');*/  
   } 
 
   //goTo Options
@@ -116,12 +65,17 @@ export class ChartPage {
   } 
   goToCalendarRegistarPage(){
     this.navCtrl.push(CalendarRegisterPage);
-  } //tka
-   
+  } 
+  
   ionViewDidLoad() {
     console.log("chartPage was successfully loaded");
-    
-    
+    const readCoinRef: firebase.database.Reference = firebase.database().ref(this.DatabaseViewURL);
+     readCoinRef.on('value',(snapshot) => {
+        snapshot.forEach(snap =>{ 
+          this.ChartLoop.push(snap.val());  
+          return false; // boolean needed!!
+        }); 
+     });  // convert (object)firebase data to array for loop 
   }
 
 }
